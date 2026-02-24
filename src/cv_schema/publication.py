@@ -79,7 +79,7 @@ class Publication(YamlSerializable):
             "url": self.url,
             "scholar_id": self.scholar_id,
             "bibtex": self.bibtex,
-            "citations_per_year": {year: count for year, count in self.citations_per_year.items()},
+            "citations_per_year": {int(year): count for year, count in self.citations_per_year.items()},
             "data_hash": self.data_hash,
             "filled": self.filled,
             "created_at": self.created_at.isoformat(),
