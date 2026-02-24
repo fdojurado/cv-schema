@@ -5,16 +5,27 @@ from cv_schema.experience import Experience
 from cv_schema.personal import PersonalInfo
 from cv_schema.google_scholar_author import GoogleScholarAuthor
 from cv_schema.publication import Publication
+from cv_schema.social import Social
+from cv_schema.research import Research
+from cv_schema.grant import Grant
+from cv_schema.affiliation import Affiliation
 from cv_schema.yaml_serialize import YamlSerializable
 
 
 @dataclass
 class CVModel(YamlSerializable):
     personal: PersonalInfo
+    social: Social
     education: list[Education]
+    research: Research
     experience: list[Experience]
     google_scholar_author: GoogleScholarAuthor
     publications: list[Publication]
+    grants: list[Grant]
+    affiliations: list[Affiliation]
+    long_intro: str = ""
+    short_intro: str = ""
+    security: Security
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):

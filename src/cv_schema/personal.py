@@ -4,26 +4,50 @@ from cv_schema.yaml_serialize import YamlSerializable
 
 
 @dataclass
-class PersonalInfo(YamlSerializable):
-    name: str
-    email: str
-    phone: str
-    address: str
+class AuthorName(YamlSerializable):
+    full_name: str
+    preferred_name: str
+    display_name: str
+    citation_name: str
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
         return cls(
-            name=yaml_data.get("name", ""),
-            email=yaml_data.get("email", ""),
-            phone=yaml_data.get("phone", ""),
-            address=yaml_data.get("address", "")
+            full_name=yaml_data.get("full_name", ""),
+            preferred_name=yaml_data.get("preferred_name", ""),
+            display_name=yaml_data.get("display_name", ""),
+            citation_name=yaml_data.get("citation_name", "")
         )
 
-    # we need to create a method to export the personal info to yaml format
     def to_yaml(self) -> dict:
         return {
-            "name": self.name,
+            "full_name": self.full_name,
+            "preferred_name": self.preferred_name,
+            "display_name": self.display_name,
+            "citation_name": self.citation_name
+        }
+
+
+@dataclass
+class PersonalInfo(YamlSerializable):
+    email: str
+    location: str
+    address: str
+    phone: str
+
+    @classmethod
+    def from_yaml(cls, yaml_data: dict):
+        return cls(
+            email=yaml_data.get("email", ""),
+            location=yaml_data.get("location", ""),
+            address=yaml_data.get("address", ""),
+            phone=yaml_data.get("phone", "")
+        )
+
+    def to_yaml(self) -> dict:
+        return {
             "email": self.email,
-            "phone": self.phone,
-            "address": self.address
+            "location": self.location,
+            "address": self.address,
+            "phone": self.phone
         }
