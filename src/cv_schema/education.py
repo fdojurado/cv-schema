@@ -1,7 +1,7 @@
 
 from dataclasses import dataclass
 from datetime import date
-from models.yaml_serialize import YamlSerializable
+from cv_schema.yaml_serialize import YamlSerializable
 
 
 @dataclass

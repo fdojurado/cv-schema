@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from models.yaml_serialize import YamlSerializable
+from cv_schema.yaml_serialize import YamlSerializable
 
 
 class Experience(YamlSerializable):

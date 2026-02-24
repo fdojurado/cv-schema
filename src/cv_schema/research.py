@@ -1,25 +1,25 @@
 from dataclasses import dataclass
 
-from models.yaml_serialize import YamlSerializable
+from cv_schema.yaml_serialize import YamlSerializable
 
 
 @dataclass
-class Publication(YamlSerializable):
+class Research(YamlSerializable):
     title: str
-    journal: str
+    description: str
     date: str
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
         return cls(
             title=yaml_data.get("title", ""),
-            journal=yaml_data.get("journal", ""),
+            description=yaml_data.get("description", ""),
             date=yaml_data.get("date", "")
         )
 
     def to_yaml(self) -> dict:
         return {
             "title": self.title,
-            "journal": self.journal,
+            "description": self.description,
             "date": self.date
         }

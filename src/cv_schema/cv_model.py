@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from datetime import date
-from models.education import Education
-from models.experience import Experience
-from models.personal import PersonalInfo
-from models.research import Research
-from models.publication import Publication
-from models.yaml_serialize import YamlSerializable
+from cv_schema import Education
+from cv_schema.experience import Experience
+from cv_schema.personal import PersonalInfo
+from cv_schema.research import Research
+from cv_schema.publication import Publication
+from cv_schema.yaml_serialize import YamlSerializable
 
 
 @dataclass
