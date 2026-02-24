@@ -7,7 +7,7 @@ from cv_schema.publication import Publication
 
 
 @dataclass
-class GoogleScholar(YamlSerializable):
+class GoogleScholarAuthor(YamlSerializable):
     name: str
     scholar_id: str
     affiliation: Optional[str] = None
