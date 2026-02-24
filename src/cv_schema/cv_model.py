@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import date
-from cv_schema import Education
+from cv_schema.education import Education
 from cv_schema.experience import Experience
 from cv_schema.personal import PersonalInfo
 from cv_schema.research import Research
