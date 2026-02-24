@@ -62,7 +62,7 @@ class GoogleScholarAuthor(YamlSerializable):
             "h_index_5y": self.h_index_5y,
             "i10_index": self.i10_index,
             "i10_index_5y": self.i10_index_5y,
-            "citations_per_year": self.citations_per_year,
+            "citations_per_year": {year: count for year, count in self.citations_per_year.items()},
             "publications": [pub.to_yaml() for pub in self.publications],
             "profile_url": self.profile_url,
             "homepage": self.homepage,
