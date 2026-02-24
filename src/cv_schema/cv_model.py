@@ -3,7 +3,7 @@ from datetime import date
 from cv_schema.education import Education
 from cv_schema.experience import Experience
 from cv_schema.personal import PersonalInfo
-from src.cv_schema.google_scholar import GoogleScholarAuthor
+from src.cv_schema.google_scholar_author import GoogleScholarAuthor
 from cv_schema.publication import Publication
 from cv_schema.yaml_serialize import YamlSerializable
 
