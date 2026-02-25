@@ -29,7 +29,7 @@ class Name(YamlSerializable):
 
 
 @dataclass
-class PersonalInfo(YamlSerializable):
+class Personal(YamlSerializable):
     name: Name
     email: str
     location: str

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import date
 from cv_schema.education import Education
 from cv_schema.experience import Experience
-from cv_schema.personal import PersonalInfo
+from cv_schema.personal import Personal
 from cv_schema.google_scholar_author import GoogleScholarAuthor
 from cv_schema.publication import Publication
 from cv_schema.social import Social
@@ -15,7 +15,7 @@ from cv_schema.yaml_serialize import YamlSerializable
 
 @dataclass
 class CVModel(YamlSerializable):
-    personal: PersonalInfo
+    personal: Personal
     social: Social
     education: list[Education]
     research: Research
@@ -31,7 +31,7 @@ class CVModel(YamlSerializable):
     @classmethod
     def from_yaml(cls, yaml_data: dict):
         return cls(
-            personal=PersonalInfo.from_yaml(yaml_data.get("personal", {})),
+            personal=Personal.from_yaml(yaml_data.get("personal", {})),
             social=Social.from_yaml(yaml_data.get("social", {})),
             education=[Education.from_yaml(edu)
                        for edu in yaml_data.get("education", [])],
