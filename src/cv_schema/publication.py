@@ -4,24 +4,19 @@ from datetime import datetime
 from cv_schema.flexible_date import parse_flexible_date
 from cv_schema.yaml_serialize import YamlSerializable
 
+from pydantic import BaseModel, Field
 
-@dataclass
-class PubAuthor(YamlSerializable):
+
+class PubAuthor(BaseModel, YamlSerializable):
     id: int
-    affiliations: list[int]
+    affiliations: list[int] = Field(default_factory=list)
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
-        return cls(
-            id=yaml_data.get("id", 0),
-            affiliations=yaml_data.get("affiliations", [])
-        )
+        return cls(**yaml_data)
 
     def to_yaml(self) -> dict:
-        return {
-            "id": self.id,
-            "affiliations": self.affiliations
-        }
+        return self.model_dump()
 
 
 @dataclass
@@ -75,8 +70,8 @@ class Publication(YamlSerializable):
     authors: list[PubAuthor]
     venue: Venue
     date: datetime
-    volume: str
-    issue: str
+    volume: int
+    issue: int
     pages: str
     doi: str
     url: str
