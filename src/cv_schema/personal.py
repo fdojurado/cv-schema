@@ -4,7 +4,7 @@ from cv_schema.yaml_serialize import YamlSerializable
 
 
 @dataclass
-class AuthorName(YamlSerializable):
+class Name(YamlSerializable):
     full_name: str
     preferred_name: str
     display_name: str
@@ -30,7 +30,7 @@ class AuthorName(YamlSerializable):
 
 @dataclass
 class PersonalInfo(YamlSerializable):
-    name: AuthorName
+    name: Name
     email: str
     location: str
     address: str
@@ -39,7 +39,7 @@ class PersonalInfo(YamlSerializable):
     @classmethod
     def from_yaml(cls, yaml_data: dict):
         return cls(
-            name=AuthorName.from_yaml(yaml_data.get("name", {})),
+            name=Name.from_yaml(yaml_data.get("name", {})),
             email=yaml_data.get("email", ""),
             location=yaml_data.get("location", ""),
             address=yaml_data.get("address", ""),
