@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from cv_schema.yaml_serialize import YamlSerializable
 
+@dataclass
 class Affiliation(YamlSerializable):
     institution_id: int
     current: bool
