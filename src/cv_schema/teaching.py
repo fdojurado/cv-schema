@@ -1,6 +1,7 @@
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, datetime0
 
+from cv_schema.flexible_date import parse_flexible_date
 from cv_schema.yaml_serialize import YamlSerializable
 
 
@@ -12,10 +13,8 @@ class TeachingDate(YamlSerializable):
     @classmethod
     def from_yaml(cls, yaml_data: dict):
         return cls(
-            start_date=datetime.fromisoformat(
-                yaml_data.get("start_date", "1970-01-01")),
-            end_date=datetime.fromisoformat(
-                yaml_data.get("end_date", "1970-01-01"))
+            start_date=parse_flexible_date(yaml_data.get("start_date")),
+            end_date=parse_flexible_date(yaml_data.get("end_date", ""))
         )
 
     def to_yaml(self) -> dict:

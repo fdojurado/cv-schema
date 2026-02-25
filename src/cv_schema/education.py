@@ -1,6 +1,7 @@
 
 from dataclasses import dataclass
 from datetime import datetime
+from cv_schema.flexible_date import parse_flexible_date
 from cv_schema.yaml_serialize import YamlSerializable
 
 
@@ -20,10 +21,8 @@ class Education(YamlSerializable):
         return cls(
             degree=yaml_data.get("degree", ""),
             institution_id=yaml_data.get("institution_id", 0),
-            start_date=datetime.fromisoformat(
-                yaml_data.get("start_date", "1900-01-01")),
-            end_date=datetime.fromisoformat(
-                yaml_data.get("end_date", "1900-01-01")),
+            start_date=parse_flexible_date(yaml_data.get("start_date")),
+            end_date=parse_flexible_date(yaml_data.get("end_date", "")),
             thesis_title=yaml_data.get("thesis_title", ""),
             thesis_url=yaml_data.get("thesis_url", ""),
             advisor_keys=yaml_data.get("advisor_keys", []),

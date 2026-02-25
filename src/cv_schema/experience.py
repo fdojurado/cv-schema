@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional
 
+from cv_schema.flexible_date import parse_flexible_date
 from cv_schema.yaml_serialize import YamlSerializable
 
 
@@ -17,32 +17,12 @@ class Experience(YamlSerializable):
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
-        def parse_date(value: Optional[str], default: str) -> datetime:
-            if not value:
-                return datetime.fromisoformat(default)
-
-            # If ruamel already parsed it as datetime
-            if isinstance(value, datetime):
-                return value
-
-            value_str = str(value).strip().lower()
-
-            if value_str == "present":
-                return datetime.now()
-
-            return datetime.fromisoformat(value_str)
 
         return cls(
             institution_id=yaml_data.get("institution_id", 0),
             position=yaml_data.get("position", ""),
-            start_date=parse_date(
-                yaml_data.get("start_date"),
-                "1970-01-01",
-            ),
-            end_date=parse_date(
-                yaml_data.get("end_date"),
-                datetime.now().strftime("%Y-%m-%d"),
-            ),
+            start_date=parse_flexible_date(yaml_data.get("start_date")),
+            end_date=parse_flexible_date(yaml_data.get("end_date", "")),
             description=yaml_data.get("description", ""),
             responsibilities=yaml_data.get("responsibilities") or [],
             achievements=yaml_data.get("achievements") or [],
