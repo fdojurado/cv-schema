@@ -4,6 +4,7 @@ from datetime import datetime
 from cv_schema.yaml_serialize import YamlSerializable
 
 
+@dataclass
 class Impact(YamlSerializable):
     citedby: int = None
     citedby5y: int = None
