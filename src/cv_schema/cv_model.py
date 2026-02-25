@@ -50,6 +50,7 @@ class CVModel(YamlSerializable):
                 yaml_data.get("google_scholar_author", {})),
             publications=[GSPublication.from_yaml(
                 pub) for pub in yaml_data.get("publications", [])],
+            coauthors=[CoAuthor.from_yaml(coauth) for coauth in yaml_data.get("coauthors", [])],
             grants=[Grant.from_yaml(grant)
                     for grant in yaml_data.get("grants", [])],
             affiliations=[Affiliation.from_yaml(
@@ -69,6 +70,7 @@ class CVModel(YamlSerializable):
             "teaching": [teach.to_yaml() for teach in self.teaching],
             "google_scholar_author": self.google_scholar_author.to_yaml(),
             "publications": [pub.to_yaml() for pub in self.publications],
+            "coauthors": [coauth.to_yaml() for coauth in self.coauthors],
             "grants": [grant.to_yaml() for grant in self.grants],
             "affiliations": [aff.to_yaml() for aff in self.affiliations],
             "long_intro": self.long_intro,
