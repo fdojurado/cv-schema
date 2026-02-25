@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from cv_schema.yaml_serialize import YamlSerializable
 
 
+@dataclass
 class Social(YamlSerializable):
     google_scholar: str
     linkedin: str
