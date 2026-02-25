@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
 
 from cv_schema.yaml_serialize import YamlSerializable
 
@@ -16,16 +17,35 @@ class Experience(YamlSerializable):
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
+        def parse_date(value: Optional[str], default: str) -> datetime:
+            if not value:
+                return datetime.strptime(default, "%Y-%m-%d")
+
+            # If ruamel already parsed it as datetime
+            if isinstance(value, datetime):
+                return value
+
+            value_str = str(value).strip().lower()
+
+            if value_str == "present":
+                return datetime.now()
+
+            return datetime.strptime(value_str, "%Y-%m-%d")
+
         return cls(
             institution_id=yaml_data.get("institution_id", 0),
             position=yaml_data.get("position", ""),
-            start_date=datetime.strptime(
-                yaml_data.get("start_date", "1970-01"), "%Y-%m"),
-            end_date=datetime.strptime(
-                yaml_data.get("end_date", "1970-01"), "%Y-%m"),
+            start_date=parse_date(
+                yaml_data.get("start_date"),
+                "1970-01-01",
+            ),
+            end_date=parse_date(
+                yaml_data.get("end_date"),
+                datetime.now().strftime("%Y-%m-%d"),
+            ),
             description=yaml_data.get("description", ""),
-            responsibilities=yaml_data.get("responsibilities", []),
-            achievements=yaml_data.get("achievements", [])
+            responsibilities=yaml_data.get("responsibilities") or [],
+            achievements=yaml_data.get("achievements") or [],
         )
 
     def to_yaml(self) -> dict:
