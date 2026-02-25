@@ -4,7 +4,7 @@ from datetime import datetime
 from cv_schema.flexible_date import parse_flexible_date
 from cv_schema.yaml_serialize import YamlSerializable
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict, HttpUrl
 
 
 class PubAuthor(BaseModel, YamlSerializable):
@@ -33,91 +33,53 @@ class Venue(BaseModel, YamlSerializable):
         return self.model_dump()
 
 
-@dataclass
-class Impact(YamlSerializable):
+class Impact(BaseModel, YamlSerializable):
     citedby: int
-    citations_per_year: dict[str, int]
+    citations_per_year: dict[int, int] = Field(default_factory=dict)
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
-        return cls(
-            citedby=yaml_data.get("citedby", 0),
-            citations_per_year=yaml_data.get("citations_per_year", {})
-        )
+        return cls(**yaml_data)
 
     def to_yaml(self) -> dict:
-        return {
-            "citedby": self.citedby,
-            "citations_per_year": self.citations_per_year
-        }
+        return self.model_dump()
 
 
-@dataclass
-class Publication(YamlSerializable):
+class Publication(BaseModel, YamlSerializable):
     id: str
     title: str
-    authors: list[PubAuthor]
+
+    authors: list[PubAuthor] = Field(default_factory=list)
     venue: Venue
     date: datetime
-    volume: int
-    issue: int
-    pages: str
-    doi: str
-    url: str
-    code: str
+
+    volume: int | None = None
+    issue: int | None = None
+    pages: str | None = None
+
+    doi: str | None = None
+    url: HttpUrl | None = None
+    code: str | None = None
+
     slug: str
     status: str
-    abstract: str
-    keywords: list[str]
-    copyright: str
-    license: str
-    bibtex: str
-    impact: Impact
+    abstract: str | None = None
+    keywords: list[str] = Field(default_factory=list)
+
+    copyright: str | None = None
+    license: str | None = None
+    bibtex: str | None = None
+
+    impact: Impact | None = None
+
+    model_config = ConfigDict(
+        extra="forbid",
+        validate_assignment=True,
+    )
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
-        return cls(
-            id=yaml_data.get("id", ""),
-            title=yaml_data.get("title", ""),
-            authors=[PubAuthor.from_yaml(
-                author) for author in yaml_data.get("authors", [])],
-            venue=Venue.from_yaml(yaml_data.get("venue", {})),
-            date=parse_flexible_date(yaml_data.get("date", "")),
-            volume=yaml_data.get("volume", ""),
-            issue=yaml_data.get("issue", ""),
-            pages=yaml_data.get("pages", ""),
-            doi=yaml_data.get("doi", ""),
-            url=yaml_data.get("url", ""),
-            code=yaml_data.get("code", ""),
-            slug=yaml_data.get("slug", ""),
-            status=yaml_data.get("status", ""),
-            abstract=yaml_data.get("abstract", ""),
-            keywords=yaml_data.get("keywords", []),
-            copyright=yaml_data.get("copyright", ""),
-            license=yaml_data.get("license", ""),
-            bibtex=yaml_data.get("bibtex", ""),
-            impact=Impact.from_yaml(yaml_data.get("impact", {}))
-        )
+        return cls(**yaml_data)
 
     def to_yaml(self) -> dict:
-        return {
-            "id": self.id,
-            "title": self.title,
-            "authors": [author.to_yaml() for author in self.authors],
-            "venue": self.venue.to_yaml(),
-            "date": self.date.isoformat(),
-            "volume": self.volume,
-            "issue": self.issue,
-            "pages": self.pages,
-            "doi": self.doi,
-            "url": self.url,
-            "code": self.code,
-            "slug": self.slug,
-            "status": self.status,
-            "abstract": self.abstract,
-            "keywords": self.keywords,
-            "copyright": self.copyright,
-            "license": self.license,
-            "bibtex": self.bibtex,
-            "impact": self.impact.to_yaml() if self.impact else None
-        }
+        return self.model_dump(mode="python")
