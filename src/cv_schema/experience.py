@@ -3,11 +3,15 @@ from dataclasses import dataclass
 from cv_schema.yaml_serialize import YamlSerializable
 
 
+@dataclass
 class Experience(YamlSerializable):
-    company: str
+    institution_id: int
     position: str
     start_date: str
     end_date: str
+    description: str
+    responsibilities: list[str]
+    achievements: list[str]
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
