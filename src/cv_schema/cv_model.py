@@ -7,7 +7,7 @@ from cv_schema.personal import Personal
 from cv_schema.google_scholar_author import GoogleScholarAuthor
 from cv_schema.publication import Publication
 from cv_schema.affiliation import Affiliation
-from cv_schema.institutions import Institution
+from cv_schema.institution import Institution
 from cv_schema.coauthor import CoAuthor
 from cv_schema.research import Research
 from cv_schema.security import Security
