@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from datetime import date
 from cv_schema.education import Education
 from cv_schema.experience import Experience
+from cv_schema.teaching import Teaching
 from cv_schema.personal import Personal
 from cv_schema.google_scholar_author import GoogleScholarAuthor
 from cv_schema.publication import Publication
@@ -20,6 +21,7 @@ class CVModel(YamlSerializable):
     education: list[Education]
     research: Research
     experience: list[Experience]
+    teaching: list[Teaching]
     google_scholar_author: GoogleScholarAuthor
     publications: list[Publication]
     grants: list[Grant]
@@ -38,6 +40,8 @@ class CVModel(YamlSerializable):
             research=Research.from_yaml(yaml_data.get("research", {})),
             experience=[Experience.from_yaml(
                 exp) for exp in yaml_data.get("experience", [])],
+            teaching=[Teaching.from_yaml(
+                teach) for teach in yaml_data.get("teaching", [])],
             google_scholar_author=GoogleScholarAuthor.from_yaml(
                 yaml_data.get("google_scholar_author", {})),
             publications=[Publication.from_yaml(
@@ -58,6 +62,7 @@ class CVModel(YamlSerializable):
             "education": [edu.to_yaml() for edu in self.education],
             "research": self.research.to_yaml(),
             "experience": [exp.to_yaml() for exp in self.experience],
+            "teaching": [teach.to_yaml() for teach in self.teaching],
             "google_scholar_author": self.google_scholar_author.to_yaml(),
             "publications": [pub.to_yaml() for pub in self.publications],
             "grants": [grant.to_yaml() for grant in self.grants],
