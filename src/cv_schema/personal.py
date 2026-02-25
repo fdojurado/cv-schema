@@ -30,6 +30,7 @@ class AuthorName(YamlSerializable):
 
 @dataclass
 class PersonalInfo(YamlSerializable):
+    name: AuthorName
     email: str
     location: str
     address: str
@@ -38,6 +39,7 @@ class PersonalInfo(YamlSerializable):
     @classmethod
     def from_yaml(cls, yaml_data: dict):
         return cls(
+            name=AuthorName.from_yaml(yaml_data.get("name", {})),
             email=yaml_data.get("email", ""),
             location=yaml_data.get("location", ""),
             address=yaml_data.get("address", ""),
@@ -46,6 +48,7 @@ class PersonalInfo(YamlSerializable):
 
     def to_yaml(self) -> dict:
         return {
+            "name": self.name.to_yaml(),
             "email": self.email,
             "location": self.location,
             "address": self.address,
