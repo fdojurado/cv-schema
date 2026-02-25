@@ -4,6 +4,7 @@ from cv_schema.yaml_serialize import YamlSerializable
 from cv_schema.impact import Impact
 
 
+@dataclass
 class Research(YamlSerializable):
     interests: list[str]
     focus: str
