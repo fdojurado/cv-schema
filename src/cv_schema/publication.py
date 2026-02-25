@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 
 
 class PubAuthor(BaseModel, YamlSerializable):
-    id: int
+    id: str
     affiliations: list[int] = Field(default_factory=list)
 
     @classmethod
