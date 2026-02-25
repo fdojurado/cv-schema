@@ -13,6 +13,7 @@ from cv_schema.research import Research
 from cv_schema.security import Security
 from cv_schema.social import Social
 from cv_schema.grant import Grant
+from cv_schema.news import News
 
 from cv_schema.yaml_serialize import YamlSerializable
 
@@ -20,6 +21,7 @@ from cv_schema.yaml_serialize import YamlSerializable
 @dataclass
 class CVModel(YamlSerializable):
     title: str
+    news: list[News]
     personal: Personal
     social: Social
     education: list[Education]
@@ -39,6 +41,8 @@ class CVModel(YamlSerializable):
     def from_yaml(cls, yaml_data: dict):
         return cls(
             title=yaml_data.get("title", ""),
+            news=[News.from_yaml(news_item)
+                  for news_item in yaml_data.get("news", [])],
             personal=Personal.from_yaml(yaml_data.get("personal", {})),
             social=Social.from_yaml(yaml_data.get("social", {})),
             education=[Education.from_yaml(edu)
@@ -66,6 +70,7 @@ class CVModel(YamlSerializable):
     def to_yaml(self) -> dict:
         return {
             "title": self.title,
+            "news": [news.to_yaml() for news in self.news],
             "personal": self.personal.to_yaml(),
             "social": self.social.to_yaml(),
             "education": [edu.to_yaml() for edu in self.education],
