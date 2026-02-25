@@ -19,8 +19,10 @@ class Experience(YamlSerializable):
         return cls(
             institution_id=yaml_data.get("institution_id", 0),
             position=yaml_data.get("position", ""),
-            start_date=datetime.strptime(yaml_data.get("start_date", "1970-01-01"), "%Y-%m-%d"),
-            end_date=datetime.strptime(yaml_data.get("end_date", "1970-01-01"), "%Y-%m-%d"),
+            start_date=datetime.strptime(
+                yaml_data.get("start_date", "1970-01"), "%Y-%m"),
+            end_date=datetime.strptime(
+                yaml_data.get("end_date", "1970-01"), "%Y-%m"),
             description=yaml_data.get("description", ""),
             responsibilities=yaml_data.get("responsibilities", []),
             achievements=yaml_data.get("achievements", [])
