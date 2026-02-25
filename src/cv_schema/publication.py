@@ -19,8 +19,7 @@ class PubAuthor(BaseModel, YamlSerializable):
         return self.model_dump()
 
 
-@dataclass
-class Venue(YamlSerializable):
+class Venue(BaseModel, YamlSerializable):
     name: str
     type: str
     abbreviation: str
@@ -28,20 +27,10 @@ class Venue(YamlSerializable):
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
-        return cls(
-            name=yaml_data.get("name", ""),
-            type=yaml_data.get("type", ""),
-            abbreviation=yaml_data.get("abbreviation", ""),
-            publisher=yaml_data.get("publisher", "")
-        )
+        return cls(**yaml_data)
 
     def to_yaml(self) -> dict:
-        return {
-            "name": self.name,
-            "type": self.type,
-            "abbreviation": self.abbreviation,
-            "publisher": self.publisher
-        }
+        return self.model_dump()
 
 
 @dataclass
