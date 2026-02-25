@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from datetime import datetime, datetime0
+from datetime import datetime
 
 from cv_schema.flexible_date import parse_flexible_date
 from cv_schema.yaml_serialize import YamlSerializable
