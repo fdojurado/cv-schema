@@ -19,6 +19,7 @@ from cv_schema.yaml_serialize import YamlSerializable
 
 @dataclass
 class CVModel(YamlSerializable):
+    title: str
     personal: Personal
     social: Social
     education: list[Education]
@@ -37,6 +38,7 @@ class CVModel(YamlSerializable):
     @classmethod
     def from_yaml(cls, yaml_data: dict):
         return cls(
+            title=yaml_data.get("title", ""),
             personal=Personal.from_yaml(yaml_data.get("personal", {})),
             social=Social.from_yaml(yaml_data.get("social", {})),
             education=[Education.from_yaml(edu)
@@ -50,7 +52,8 @@ class CVModel(YamlSerializable):
                 yaml_data.get("google_scholar_author", {})),
             publications=[GSPublication.from_yaml(
                 pub) for pub in yaml_data.get("publications", [])],
-            coauthors=[CoAuthor.from_yaml(coauth) for coauth in yaml_data.get("coauthors", [])],
+            coauthors=[CoAuthor.from_yaml(coauth)
+                       for coauth in yaml_data.get("coauthors", [])],
             grants=[Grant.from_yaml(grant)
                     for grant in yaml_data.get("grants", [])],
             affiliations=[Affiliation.from_yaml(
@@ -62,6 +65,7 @@ class CVModel(YamlSerializable):
 
     def to_yaml(self) -> dict:
         return {
+            "title": self.title,
             "personal": self.personal.to_yaml(),
             "social": self.social.to_yaml(),
             "education": [edu.to_yaml() for edu in self.education],
