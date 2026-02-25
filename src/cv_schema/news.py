@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
+from cv_schema.flexible_date import parse_flexible_date
 from cv_schema.yaml_serialize import YamlSerializable
 
 
@@ -37,8 +38,7 @@ class News(YamlSerializable):
     def from_yaml(cls, yaml_data: dict):
         return cls(
             title=yaml_data.get("title", ""),
-            date=datetime.fromisoformat(
-                yaml_data.get("date", "1970-01-01T00:00:00")),
+            date=parse_flexible_date(yaml_data.get("date")),
             content=yaml_data.get("content", ""),
             links=[Link.from_yaml(link) for link in yaml_data.get("links", [])]
         )
