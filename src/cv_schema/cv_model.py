@@ -5,7 +5,7 @@ from cv_schema.experience import Experience
 from cv_schema.teaching import Teaching
 from cv_schema.personal import Personal
 from cv_schema.google_scholar_author import GoogleScholarAuthor
-from cv_schema.publication import Publication
+from cv_schema.gs_publication import GSPublication
 from cv_schema.social import Social
 from cv_schema.research import Research
 from cv_schema.grant import Grant
@@ -23,7 +23,7 @@ class CVModel(YamlSerializable):
     experience: list[Experience]
     teaching: list[Teaching]
     google_scholar_author: GoogleScholarAuthor
-    publications: list[Publication]
+    publications: list[GSPublication]
     grants: list[Grant]
     affiliations: list[Affiliation]
     long_intro: str
@@ -44,7 +44,7 @@ class CVModel(YamlSerializable):
                 teach) for teach in yaml_data.get("teaching", [])],
             google_scholar_author=GoogleScholarAuthor.from_yaml(
                 yaml_data.get("google_scholar_author", {})),
-            publications=[Publication.from_yaml(
+            publications=[GSPublication.from_yaml(
                 pub) for pub in yaml_data.get("publications", [])],
             grants=[Grant.from_yaml(grant)
                     for grant in yaml_data.get("grants", [])],

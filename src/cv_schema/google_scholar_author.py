@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 from cv_schema.yaml_serialize import YamlSerializable
-from cv_schema.publication import Publication
+from cv_schema.gs_publication import GSPublication
 
 
 @dataclass
@@ -20,7 +20,7 @@ class GoogleScholarAuthor(YamlSerializable):
     i10_index: int = 0
     i10_index_5y: int = 0
     citations_per_year: dict[int, int] = field(default_factory=dict)
-    publications: list[Publication] = field(default_factory=list)
+    publications: list[GSPublication] = field(default_factory=list)
     profile_url: Optional[str] = None
     homepage: Optional[str] = None
     data_hash: Optional[str] = None
@@ -42,7 +42,7 @@ class GoogleScholarAuthor(YamlSerializable):
             i10_index=yaml_data.get("i10_index", 0),
             i10_index_5y=yaml_data.get("i10_index_5y", 0),
             citations_per_year=yaml_data.get("citations_per_year", {}),
-            publications=[Publication.from_yaml(
+            publications=[GSPublication.from_yaml(
                 pub) for pub in yaml_data.get("publications", [])],
             profile_url=yaml_data.get("profile_url", None),
             homepage=yaml_data.get("homepage", None),

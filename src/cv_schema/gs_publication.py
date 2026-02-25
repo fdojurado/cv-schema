@@ -13,8 +13,8 @@ class FilledStatus(Enum):
 
 
 @dataclass
-class Publication(YamlSerializable):
-    """Represents an academic publication."""
+class GSPublication(YamlSerializable):
+    """Represents a publication from Google Scholar."""
 
     title: str
     authors: list[str]
