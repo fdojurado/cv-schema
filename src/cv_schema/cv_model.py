@@ -5,7 +5,6 @@ from cv_schema.experience import Experience
 from cv_schema.teaching import Teaching
 from cv_schema.personal import Personal
 from cv_schema.google_scholar_author import GoogleScholarAuthor
-from cv_schema.gs_publication import GSPublication
 from cv_schema.publication import Publication
 from cv_schema.affiliation import Affiliation
 from cv_schema.coauthor import CoAuthor
@@ -54,7 +53,7 @@ class CVModel(YamlSerializable):
                 teach) for teach in yaml_data.get("teaching", [])],
             google_scholar_author=GoogleScholarAuthor.from_yaml(
                 yaml_data.get("google_scholar_author", {})),
-            publications=[GSPublication.from_yaml(
+            publications=[Publication.from_yaml(
                 pub) for pub in yaml_data.get("publications", [])],
             coauthors=[CoAuthor.from_yaml(coauth)
                        for coauth in yaml_data.get("coauthors", [])],
