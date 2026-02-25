@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from cv_schema.impact import Impact
-
 from cv_schema.yaml_serialize import YamlSerializable
 
 
@@ -47,6 +45,25 @@ class Venue(YamlSerializable):
             "type": self.type,
             "abbreviation": self.abbreviation,
             "publisher": self.publisher
+        }
+
+
+@dataclass
+class Impact(YamlSerializable):
+    citedby: int
+    citations_per_year: dict[str, int]
+
+    @classmethod
+    def from_yaml(cls, yaml_data: dict):
+        return cls(
+            citedby=yaml_data.get("citedby", 0),
+            citations_per_year=yaml_data.get("citations_per_year", {})
+        )
+
+    def to_yaml(self) -> dict:
+        return {
+            "citedby": self.citedby,
+            "citations_per_year": self.citations_per_year
         }
 
 
