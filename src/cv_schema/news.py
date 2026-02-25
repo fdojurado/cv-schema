@@ -9,6 +9,7 @@ from cv_schema.yaml_serialize import YamlSerializable
 class Link(YamlSerializable):
     doi: str
     pdf: str
+    code: str
     text: str
 
     @classmethod
@@ -16,6 +17,7 @@ class Link(YamlSerializable):
         return cls(
             doi=yaml_data.get("doi", ""),
             pdf=yaml_data.get("pdf", ""),
+            code=yaml_data.get("code", ""),
             text=yaml_data.get("text", "")
         )
 
@@ -23,6 +25,7 @@ class Link(YamlSerializable):
         return {
             "doi": self.doi,
             "pdf": self.pdf,
+            "code": self.code,
             "text": self.text
         }
 
