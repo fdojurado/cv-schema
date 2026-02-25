@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 
 from cv_schema.yaml_serialize import YamlSerializable
-from src.cv_schema.impact import Impact
 
 
 @dataclass
