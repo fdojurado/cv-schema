@@ -8,7 +8,7 @@ from cv_schema.yaml_serialize import YamlSerializable
 @dataclass
 class PubAuthor(YamlSerializable):
     id: int
-    affiliations: list[str]
+    affiliations: list[int]
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
