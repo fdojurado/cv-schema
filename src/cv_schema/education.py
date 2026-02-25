@@ -8,8 +8,8 @@ from cv_schema.yaml_serialize import YamlSerializable
 class Education(YamlSerializable):
     degree: str
     institution_id: int
-    year_start: datetime
-    year_end: datetime
+    start_date: datetime
+    end_date: datetime
     thesis_title: str
     thesis_url: str
     advisor_keys: list[str]
@@ -20,10 +20,10 @@ class Education(YamlSerializable):
         return cls(
             degree=yaml_data.get("degree", ""),
             institution_id=yaml_data.get("institution_id", 0),
-            year_start=datetime.fromisoformat(
-                yaml_data.get("year_start", "1900-01-01")),
-            year_end=datetime.fromisoformat(
-                yaml_data.get("year_end", "1900-01-01")),
+            start_date=datetime.fromisoformat(
+                yaml_data.get("start_date", "1900-01-01")),
+            end_date=datetime.fromisoformat(
+                yaml_data.get("end_date", "1900-01-01")),
             thesis_title=yaml_data.get("thesis_title", ""),
             thesis_url=yaml_data.get("thesis_url", ""),
             advisor_keys=yaml_data.get("advisor_keys", []),
@@ -34,8 +34,8 @@ class Education(YamlSerializable):
         return {
             "degree": self.degree,
             "institution_id": self.institution_id,
-            "year_start": self.year_start.isoformat(),
-            "year_end": self.year_end.isoformat(),
+            "start_date": self.start_date.isoformat(),
+            "end_date": self.end_date.isoformat(),
             "thesis_title": self.thesis_title,
             "thesis_url": self.thesis_url,
             "advisor_keys": self.advisor_keys,
