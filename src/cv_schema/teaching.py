@@ -12,10 +12,10 @@ class TeachingDate(YamlSerializable):
     @classmethod
     def from_yaml(cls, yaml_data: dict):
         return cls(
-            start_date=datetime.strptime(
-                yaml_data.get("start_date", "1970-01"), "%Y-%m"),
-            end_date=datetime.strptime(
-                yaml_data.get("end_date", "1970-01"), "%Y-%m")
+            start_date=datetime.fromisoformat(
+                yaml_data.get("start_date", "1970-01-01")),
+            end_date=datetime.fromisoformat(
+                yaml_data.get("end_date", "1970-01-01"))
         )
 
     def to_yaml(self) -> dict:

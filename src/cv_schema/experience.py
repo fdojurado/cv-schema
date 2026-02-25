@@ -19,7 +19,7 @@ class Experience(YamlSerializable):
     def from_yaml(cls, yaml_data: dict):
         def parse_date(value: Optional[str], default: str) -> datetime:
             if not value:
-                return datetime.strptime(default, "%Y-%m-%d")
+                return datetime.fromisoformat(default)
 
             # If ruamel already parsed it as datetime
             if isinstance(value, datetime):
@@ -30,7 +30,7 @@ class Experience(YamlSerializable):
             if value_str == "present":
                 return datetime.now()
 
-            return datetime.strptime(value_str, "%Y-%m-%d")
+            return datetime.fromisoformat(value_str)
 
         return cls(
             institution_id=yaml_data.get("institution_id", 0),
