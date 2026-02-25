@@ -81,7 +81,7 @@ class Publication(YamlSerializable):
                 author) for author in yaml_data.get("authors", [])],
             venue=Venue.from_yaml(yaml_data.get("venue", {})),
             date=datetime.strptime(yaml_data.get(
-                "date", "1970-01-01"), "%Y-%m-%d"),
+                "date", "1970-01"), "%Y-%m"),
             volume=yaml_data.get("volume", ""),
             issue=yaml_data.get("issue", ""),
             pages=yaml_data.get("pages", ""),
