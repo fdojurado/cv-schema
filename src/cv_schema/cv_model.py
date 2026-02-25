@@ -23,7 +23,7 @@ class CVModel(YamlSerializable):
     social: Social
     education: list[Education]
     research: Research
-    experience: list[Experience]
+    experiences: list[Experience]
     teaching: list[Teaching]
     google_scholar_author: GoogleScholarAuthor
     publications: list[Publication]
@@ -42,8 +42,8 @@ class CVModel(YamlSerializable):
             education=[Education.from_yaml(edu)
                        for edu in yaml_data.get("education", [])],
             research=Research.from_yaml(yaml_data.get("research", {})),
-            experience=[Experience.from_yaml(
-                exp) for exp in yaml_data.get("experience", [])],
+            experiences=[Experience.from_yaml(
+                exp) for exp in yaml_data.get("experiences", [])],
             teaching=[Teaching.from_yaml(
                 teach) for teach in yaml_data.get("teaching", [])],
             google_scholar_author=GoogleScholarAuthor.from_yaml(
@@ -65,7 +65,7 @@ class CVModel(YamlSerializable):
             "social": self.social.to_yaml(),
             "education": [edu.to_yaml() for edu in self.education],
             "research": self.research.to_yaml(),
-            "experience": [exp.to_yaml() for exp in self.experience],
+            "experiences": [exp.to_yaml() for exp in self.experiences],
             "teaching": [teach.to_yaml() for teach in self.teaching],
             "google_scholar_author": self.google_scholar_author.to_yaml(),
             "publications": [pub.to_yaml() for pub in self.publications],
