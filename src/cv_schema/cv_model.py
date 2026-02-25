@@ -7,6 +7,7 @@ from cv_schema.personal import Personal
 from cv_schema.google_scholar_author import GoogleScholarAuthor
 from cv_schema.publication import Publication
 from cv_schema.affiliation import Affiliation
+from cv_schema.institutions import Institution
 from cv_schema.coauthor import CoAuthor
 from cv_schema.research import Research
 from cv_schema.security import Security
@@ -35,6 +36,7 @@ class CVModel(YamlSerializable):
     long_intro: str
     short_intro: str
     security: Security
+    institutions: list[Institution]
 
     @classmethod
     def from_yaml(cls, yaml_data: dict):
@@ -63,7 +65,9 @@ class CVModel(YamlSerializable):
                 aff) for aff in yaml_data.get("affiliations", [])],
             long_intro=yaml_data.get("long_intro", ""),
             short_intro=yaml_data.get("short_intro", ""),
-            security=Security.from_yaml(yaml_data.get("security", {}))
+            security=Security.from_yaml(yaml_data.get("security", {})),
+            institutions=[Institution.from_yaml(inst)
+                          for inst in yaml_data.get("institutions", [])]
         )
 
     def to_yaml(self) -> dict:
@@ -83,5 +87,6 @@ class CVModel(YamlSerializable):
             "affiliations": [aff.to_yaml() for aff in self.affiliations],
             "long_intro": self.long_intro,
             "short_intro": self.short_intro,
-            "security": self.security.to_yaml()
+            "security": self.security.to_yaml(),
+            "institutions": [inst.to_yaml() for inst in self.institutions]
         }
