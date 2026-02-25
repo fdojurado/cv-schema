@@ -121,7 +121,7 @@ class Publication(YamlSerializable):
             "title": self.title,
             "authors": [author.to_yaml() for author in self.authors],
             "venue": self.venue.to_yaml(),
-            "date": self.date.strftime("%Y-%m-%d"),
+            "date": self.date.isoformat(),
             "volume": self.volume,
             "issue": self.issue,
             "pages": self.pages,

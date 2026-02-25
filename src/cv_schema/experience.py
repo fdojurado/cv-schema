@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime
 
 from cv_schema.yaml_serialize import YamlSerializable
 
@@ -7,8 +8,8 @@ from cv_schema.yaml_serialize import YamlSerializable
 class Experience(YamlSerializable):
     institution_id: int
     position: str
-    start_date: str
-    end_date: str
+    start_date: datetime
+    end_date: datetime
     description: str
     responsibilities: list[str]
     achievements: list[str]
@@ -18,8 +19,8 @@ class Experience(YamlSerializable):
         return cls(
             institution_id=yaml_data.get("institution_id", 0),
             position=yaml_data.get("position", ""),
-            start_date=yaml_data.get("start_date", ""),
-            end_date=yaml_data.get("end_date", ""),
+            start_date=datetime.strptime(yaml_data.get("start_date", "1970-01-01"), "%Y-%m-%d"),
+            end_date=datetime.strptime(yaml_data.get("end_date", "1970-01-01"), "%Y-%m-%d"),
             description=yaml_data.get("description", ""),
             responsibilities=yaml_data.get("responsibilities", []),
             achievements=yaml_data.get("achievements", [])
@@ -29,8 +30,8 @@ class Experience(YamlSerializable):
         return {
             "institution_id": self.institution_id,
             "position": self.position,
-            "start_date": self.start_date,
-            "end_date": self.end_date,
+            "start_date": self.start_date.isoformat(),
+            "end_date": self.end_date.isoformat(),
             "description": self.description,
             "responsibilities": self.responsibilities,
             "achievements": self.achievements
