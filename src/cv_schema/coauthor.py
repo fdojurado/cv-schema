@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field, ConfigDict
 class CoAuthor(BaseModel):
     id: str
     personal: Personal
-    title: str
+    title: str | None = None
     affiliations: list[Affiliation] = Field(default_factory=list)
     social: Social | None = None
 
