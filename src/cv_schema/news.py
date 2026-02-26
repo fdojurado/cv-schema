@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 from pydantic import BaseModel, Field, ConfigDict
 
 
@@ -16,7 +16,7 @@ class Link(BaseModel):
 
 class News(BaseModel):
     title: str
-    date: date
+    date: datetime
     content: str
     links: list[Link] = Field(default_factory=list)
 
