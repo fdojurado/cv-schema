@@ -36,7 +36,7 @@ class CVModel(BaseModel):
     institutions: list[Institution] = Field(default_factory=list)
     supervisions: list[Supervision] = Field(default_factory=list)
     memberships: list[Membership] = Field(default_factory=list)
-    referees: list[Reference] = Field(default_factory=list)
+    referees: list[Referee] = Field(default_factory=list)
 
     personal: Personal
     social: Social
