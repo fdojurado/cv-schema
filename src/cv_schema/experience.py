@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, ConfigDict
 
 
 class Experience(BaseModel):
-    institution_id: str
+    institution_id: int | None = None
     position: str
     start_date: datetime
     end_date: datetime
