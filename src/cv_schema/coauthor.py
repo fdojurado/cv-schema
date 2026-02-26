@@ -6,11 +6,11 @@ from pydantic import BaseModel, Field, ConfigDict
 
 
 class CoAuthor(BaseModel):
-    id: int
+    id: str
     personal: Personal
     title: str
     affiliations: list[Affiliation] = Field(default_factory=list)
-    social: Social
+    social: Social | None = None
 
     model_config = ConfigDict(
         extra="forbid",
