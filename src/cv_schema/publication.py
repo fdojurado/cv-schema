@@ -1,13 +1,6 @@
 from datetime import datetime
-from enum import Enum, auto
 
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
-
-
-class Status(Enum):
-    NOT_FILLED = auto()
-    PARTIALLY_FILLED = auto()
-    FULLY_FILLED = auto()
 
 
 class PubAuthor(BaseModel):
@@ -53,8 +46,8 @@ class Publication(BaseModel):
     url: HttpUrl | None = None
     code: str | None = None
 
-    slug: str
-    status: Status = Status.NOT_FILLED
+    slug: str | None = None
+    status: str | None = None
     abstract: str | None = None
     keywords: list[str] = Field(default_factory=list)
 
