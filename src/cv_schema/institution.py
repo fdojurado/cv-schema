@@ -3,13 +3,13 @@ from pydantic import BaseModel, ConfigDict
 
 class Institution(BaseModel):
     idx: int
-    department: str
-    department_short: str
+    department: str | None = None
+    department_short: str | None = None
     institution: str
-    institution_short: str
-    city: str
-    country: str
-    website: str
+    institution_short: str | None = None
+    city: str | None = None
+    country: str | None = None
+    website: str | None = None
 
     model_config = ConfigDict(
         extra="forbid",
