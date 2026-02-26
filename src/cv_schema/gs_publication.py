@@ -31,7 +31,7 @@ class GSPublication(BaseModel):
     bibtex: Optional[str] = None
     citations_per_year: dict[int, int] = Field(default_factory=dict)
     data_hash: Optional[str] = None
-    filled: Optional[int] = Field(
+    status: Optional[int] = Field(
         default_factory=lambda: FilledStatus.NOT_FILLED.value)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
