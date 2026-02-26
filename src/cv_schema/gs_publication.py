@@ -5,7 +5,7 @@ from typing import Optional
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
 
 
-class FilledStatus(Enum):
+class Status(Enum):
     NOT_FILLED = 1
     PARTIALLY_FILLED = 2
     FULLY_FILLED = 3
@@ -32,7 +32,7 @@ class GSPublication(BaseModel):
     citations_per_year: dict[int, int] = Field(default_factory=dict)
     data_hash: Optional[str] = None
     status: Optional[int] = Field(
-        default_factory=lambda: FilledStatus.NOT_FILLED.value)
+        default_factory=lambda: Status.NOT_FILLED.value)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
