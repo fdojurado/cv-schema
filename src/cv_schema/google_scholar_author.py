@@ -1,7 +1,6 @@
 from datetime import datetime
 from typing import Optional
 
-
 from cv_schema.gs_publication import GSPublication
 
 from pydantic import BaseModel, Field, ConfigDict
@@ -23,7 +22,6 @@ class GoogleScholarAuthor(BaseModel):
     publications: list[GSPublication] = Field(default_factory=list)
     profile_url: Optional[str] = None
     homepage: Optional[str] = None
-    status: Status = Status.NOT_FILLED
     data_hash: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
