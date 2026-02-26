@@ -3,8 +3,8 @@ from pydantic import BaseModel, ConfigDict
 
 class Service(BaseModel):
     id: str
-    venue: str
     type: str
+    venue: str | None = None
     evaluation_committee: str | None = None
     student_name: str | None = None
     degree_program: str | None = None
