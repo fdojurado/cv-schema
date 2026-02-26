@@ -1,13 +1,12 @@
-from datetime import datetime
-
+from datetime import date
 from pydantic import BaseModel, Field, ConfigDict
 
 
 class Link(BaseModel):
-    doi: str
-    pdf: str
-    code: str
     text: str
+    doi: str | None = None
+    pdf: str | None = None
+    code: str | None = None
 
     model_config = ConfigDict(
         extra="forbid",
@@ -17,7 +16,7 @@ class Link(BaseModel):
 
 class News(BaseModel):
     title: str
-    date: datetime
+    date: date
     content: str
     links: list[Link] = Field(default_factory=list)
 
