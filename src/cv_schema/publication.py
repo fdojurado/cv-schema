@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from cv_schema.flexible_date import parse_flexible_date
 from cv_schema.yaml_serialize import YamlSerializable
 
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
@@ -11,13 +10,6 @@ class PubAuthor(BaseModel, YamlSerializable):
     id: str
     affiliations: list[int] = Field(default_factory=list)
 
-    @classmethod
-    def from_yaml(cls, yaml_data: dict):
-        return cls(**yaml_data)
-
-    def to_yaml(self) -> dict:
-        return self.model_dump()
-
 
 class Venue(BaseModel, YamlSerializable):
     name: str
@@ -25,24 +17,10 @@ class Venue(BaseModel, YamlSerializable):
     abbreviation: str
     publisher: str
 
-    @classmethod
-    def from_yaml(cls, yaml_data: dict):
-        return cls(**yaml_data)
-
-    def to_yaml(self) -> dict:
-        return self.model_dump()
-
 
 class Impact(BaseModel, YamlSerializable):
     citedby: int
     citations_per_year: dict[int, int] = Field(default_factory=dict)
-
-    @classmethod
-    def from_yaml(cls, yaml_data: dict):
-        return cls(**yaml_data)
-
-    def to_yaml(self) -> dict:
-        return self.model_dump()
 
 
 class Publication(BaseModel, YamlSerializable):
@@ -76,10 +54,3 @@ class Publication(BaseModel, YamlSerializable):
         extra="forbid",
         validate_assignment=True,
     )
-
-    @classmethod
-    def from_yaml(cls, yaml_data: dict):
-        return cls(**yaml_data)
-
-    def to_yaml(self) -> dict:
-        return self.model_dump(mode="python")
