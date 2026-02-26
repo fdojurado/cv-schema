@@ -12,6 +12,7 @@ from cv_schema.supervision import Supervision
 from cv_schema.coauthor import CoAuthor
 from cv_schema.research import Research
 from cv_schema.security import Security
+from cv_schema.service import Service
 from cv_schema.social import Social
 from cv_schema.grant import Grant
 from cv_schema.news import News
@@ -29,6 +30,7 @@ class CVModel(BaseModel):
     coauthors: list[CoAuthor] = Field(default_factory=list)
     grants: list[Grant] = Field(default_factory=list)
     affiliations: list[Affiliation] = Field(default_factory=list)
+    services: list[Service] = Field(default_factory=list)
     institutions: list[Institution] = Field(default_factory=list)
     supervisions: list[Supervision] = Field(default_factory=list)
 
