@@ -1,29 +1,27 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from cv_schema.yaml_serialize import YamlSerializable
-
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
 
 
-class PubAuthor(BaseModel, YamlSerializable):
+class PubAuthor(BaseModel):
     id: str
     affiliations: list[int] = Field(default_factory=list)
 
 
-class Venue(BaseModel, YamlSerializable):
+class Venue(BaseModel):
     name: str
     type: str
     abbreviation: str
     publisher: str
 
 
-class Impact(BaseModel, YamlSerializable):
+class Impact(BaseModel):
     citedby: int
     citations_per_year: dict[int, int] = Field(default_factory=dict)
 
 
-class Publication(BaseModel, YamlSerializable):
+class Publication(BaseModel):
     id: str
     title: str
 
