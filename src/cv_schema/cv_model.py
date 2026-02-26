@@ -10,10 +10,10 @@ from cv_schema.affiliation import Affiliation
 from cv_schema.institution import Institution
 from cv_schema.supervision import Supervision
 from cv_schema.membership import Membership
-from cv_schema.reference import Reference
 from cv_schema.coauthor import CoAuthor
 from cv_schema.research import Research
 from cv_schema.security import Security
+from cv_schema.referee import Referee
 from cv_schema.service import Service
 from cv_schema.social import Social
 from cv_schema.grant import Grant
@@ -36,7 +36,7 @@ class CVModel(BaseModel):
     institutions: list[Institution] = Field(default_factory=list)
     supervisions: list[Supervision] = Field(default_factory=list)
     memberships: list[Membership] = Field(default_factory=list)
-    references: list[Reference] = Field(default_factory=list)
+    referees: list[Reference] = Field(default_factory=list)
 
     personal: Personal
     social: Social

@@ -1,7 +1,7 @@
 from pydantic import BaseModel, ConfigDict
 
 
-class Reference(BaseModel):
+class Referee(BaseModel):
     id: str
 
     model_config = ConfigDict(
