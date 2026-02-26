@@ -1,17 +1,10 @@
 from datetime import datetime
 from typing import Optional
-from enum import Enum, auto
 
 
 from cv_schema.gs_publication import GSPublication
 
 from pydantic import BaseModel, Field, ConfigDict
-
-
-class Status(Enum):
-    NOT_FILLED = auto()
-    PARTIALLY_FILLED = auto()
-    FULLY_FILLED = auto()
 
 
 class GoogleScholarAuthor(BaseModel):
