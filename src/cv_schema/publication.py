@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from datetime import datetime
 
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
@@ -15,10 +14,20 @@ class Venue(BaseModel):
     abbreviation: str
     publisher: str
 
+    model_config = ConfigDict(
+        extra="forbid",
+        validate_assignment=True,
+    )
+
 
 class Impact(BaseModel):
     citedby: int
     citations_per_year: dict[int, int] = Field(default_factory=dict)
+
+    model_config = ConfigDict(
+        extra="forbid",
+        validate_assignment=True,
+    )
 
 
 class Publication(BaseModel):

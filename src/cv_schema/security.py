@@ -1,22 +1,11 @@
-from dataclasses import dataclass
-
-from cv_schema.yaml_serialize import YamlSerializable
+from pydantic import BaseModel, Field, ConfigDict, HttpUrl
 
 
-@dataclass
-class Security(YamlSerializable):
+class Security(BaseModel):
     fingerprint: str
     public_key: str
 
-    @classmethod
-    def from_yaml(cls, yaml_data: dict):
-        return cls(
-            fingerprint=yaml_data.get("fingerprint", ""),
-            public_key=yaml_data.get("public_key", "")
-        )
-
-    def to_yaml(self) -> dict:
-        return {
-            "fingerprint": self.fingerprint,
-            "public_key": self.public_key
-        }
+    model_config = ConfigDict(
+        extra="forbid",
+        validate_assignment=True,
+    )

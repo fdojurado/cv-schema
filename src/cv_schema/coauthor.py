@@ -1,35 +1,18 @@
-from dataclasses import dataclass
-
 from cv_schema.affiliation import Affiliation
 from cv_schema.personal import Personal
 from cv_schema.social import Social
-from cv_schema.yaml_serialize import YamlSerializable
+
+from pydantic import BaseModel, Field, ConfigDict
 
 
-@dataclass
-class CoAuthor(YamlSerializable):
+class CoAuthor(BaseModel):
     id: int
     personal: Personal
     title: str
-    affiliations: list[Affiliation]
+    affiliations: list[Affiliation] = Field(default_factory=list)
     social: Social
 
-    @classmethod
-    def from_yaml(cls, yaml_data: dict):
-        return cls(
-            id=yaml_data.get("id", 0),
-            personal=Personal.from_yaml(yaml_data.get("personal", {})),
-            title=yaml_data.get("title", ""),
-            affiliations=[Affiliation.from_yaml(
-                aff) for aff in yaml_data.get("affiliations", [])],
-            social=Social.from_yaml(yaml_data.get("social", {}))
-        )
-
-    def to_yaml(self) -> dict:
-        return {
-            "id": self.id,
-            "personal": self.personal.to_yaml(),
-            "title": self.title,
-            "affiliations": [aff.to_yaml() for aff in self.affiliations],
-            "social": self.social.to_yaml()
-        }
+    model_config = ConfigDict(
+        extra="forbid",
+        validate_assignment=True,
+    )
