@@ -41,7 +41,7 @@ class Publication(BaseModel):
     title: str
 
     authors: list[PubAuthor] = Field(default_factory=list)
-    venue: Venue
+    venue: Venue | None = None
     date: datetime
 
     volume: int | None = None
