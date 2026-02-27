@@ -7,7 +7,8 @@ from pydantic import BaseModel, Field, ConfigDict, HttpUrl
 class Visibility(Enum):
     PUBLIC = "public"
     PRIVATE = "private"
-    
+
+
 class VenueType(Enum):
     JOURNAL = "journal"
     CONFERENCE = "conference"
@@ -20,10 +21,10 @@ class PubAuthor(BaseModel):
 
 
 class Venue(BaseModel):
-    name: str
-    type: VenueType
-    abbreviation: str
-    publisher: str
+    name: str | None = None
+    type: VenueType = VenueType.JOURNAL
+    abbreviation: str | None = None
+    publisher: str | None = None
 
     model_config = ConfigDict(
         extra="forbid",
