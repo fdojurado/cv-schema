@@ -1,6 +1,11 @@
 from datetime import datetime
+from enum import Enum
 
 from pydantic import BaseModel, Field, ConfigDict
+
+class TeachingType(Enum):
+    UNDERGRADUATE = "undergraduate"
+    POSTGRADUATE = "postgraduate"
 
 
 class TeachingDate(BaseModel):
@@ -20,7 +25,7 @@ class Teaching(BaseModel):
     role: str
     url: str
     dates: list[TeachingDate] = Field(default_factory=list)
-    type: str
+    type: TeachingType
     responsibilities: list[str] = Field(default_factory=list)
 
     model_config = ConfigDict(
