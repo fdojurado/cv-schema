@@ -7,6 +7,11 @@ from pydantic import BaseModel, Field, ConfigDict, HttpUrl
 class Visibility(Enum):
     PUBLIC = "public"
     PRIVATE = "private"
+    
+class VenueType(Enum):
+    JOURNAL = "journal"
+    CONFERENCE = "conference"
+    WORK_IN_PROGRESS = "work-in-progress"
 
 
 class PubAuthor(BaseModel):
@@ -16,7 +21,7 @@ class PubAuthor(BaseModel):
 
 class Venue(BaseModel):
     name: str
-    type: str
+    type: VenueType
     abbreviation: str
     publisher: str
 
