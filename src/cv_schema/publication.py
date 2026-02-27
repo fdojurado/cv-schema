@@ -1,6 +1,12 @@
 from datetime import datetime
+from enum import Enum
 
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
+
+
+class Visibility(Enum):
+    PUBLIC = "public"
+    PRIVATE = "private"
 
 
 class PubAuthor(BaseModel):
@@ -56,6 +62,8 @@ class Publication(BaseModel):
     bibtex: str | None = None
 
     impact: Impact | None = None
+
+    visibility: Visibility = Visibility.PUBLIC
 
     model_config = ConfigDict(
         extra="forbid",
