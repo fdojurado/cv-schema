@@ -33,6 +33,7 @@ class GSPublication(BaseModel):
     data_hash: Optional[str] = None
     status: Optional[int] = Field(
         default_factory=lambda: Status.NOT_FILLED.value)
+    raw_data: Optional[dict] = Field(default_factory=dict)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
