@@ -1,14 +1,7 @@
 from datetime import datetime
-from enum import Enum
 from typing import Optional
 
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
-
-
-class Status(Enum):
-    NOT_FILLED = 1
-    PARTIALLY_FILLED = 2
-    FULLY_FILLED = 3
 
 
 class GSPublication(BaseModel):
@@ -31,8 +24,6 @@ class GSPublication(BaseModel):
     bibtex: Optional[str] = None
     citations_per_year: dict[int, int] = Field(default_factory=dict)
     data_hash: Optional[str] = None
-    status: Optional[int] = Field(
-        default_factory=lambda: Status.NOT_FILLED.value)
     raw_data: Optional[dict] = Field(default_factory=dict)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
